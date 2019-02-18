@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 public class MainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher dis = request.getRequestDispatcher("main.jsp");
+		RequestDispatcher dis = request.getRequestDispatcher("/list.do");
 		dis.forward(request, response);
 	}
 
