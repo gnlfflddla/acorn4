@@ -1,0 +1,24 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GoodsMapper">
+		<select id="TotalAllCount" resultType="int">
+		select count(*) from Goods
+	</select>
+		<select id="TotalCount" parameterType="String" resultType="int">
+		select count(*) from Goods where gcategory = #{gcategory}
+	</select>
+	<select id="goodsList" parameterType="String" resultType="Goods">
+		select gcode,gcategory,gname,gcontent,gprice,gimage from Goods
+		where gcategory=#{gcategory}
+	</select>
+	<select id="goodsAllList" resultType="Goods">
+		select gcode,gcategory,gname,gcontent,gprice,gimage from Goods
+	</select>
+	<select id="goodsRetrieve" parameterType="String" resultType="Goods">
+		select gcode,gcategory,gname,gcontent,gprice,gimage from Goods
+		where gCode=#{gCode}
+	</select>
+	
+</mapper>
