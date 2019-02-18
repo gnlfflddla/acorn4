@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.command.BoardCommand;
 import com.command.BoardListCommand;
+import com.command.BoardRetrieveCommand;
+import com.command.BoardWriteCommand;
 
 @WebServlet("*.do")
 public class BoardFrontController extends HttpServlet {
@@ -27,11 +29,27 @@ public class BoardFrontController extends HttpServlet {
 		
 		BoardCommand command = null;
 		String nextPage = null;
-		
-		if(com.equals("/list.do")) {
+		//목록보기
+		if(true/*com.equals("/list.do")*/) {
 			command = new BoardListCommand();
 			command.execute(request, response);
 			nextPage="board/boardList.jsp";		//외부 프레임 만들기 전 테스트용 
+		}
+		//글쓰기 폼
+		if(com.equals("/writeui.do")) {
+			nextPage="board/boardWrite.jsp";
+		}
+		//글쓰기
+		if(com.equals("/write.do")) {
+			command = new BoardWriteCommand();
+			command.execute(request, response);
+			nextPage="board/boardList.jsp";
+		}
+		//글자세히보기
+		if(com.equals("/retrieve.do")) {
+			command = new BoardRetrieveCommand();
+			command.execute(request, response);
+			nextPage="board/boardRetrieve.jsp";
 		}
 		
 		RequestDispatcher dis = request.getRequestDispatcher(nextPage);

@@ -6,10 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 	<h1>게시판 목록 보기</h1>
-	<table border="1">
+	<table border="1" class="type10">
 		<tr>
 			<td colspan="5">
 				<form action="search.do">
@@ -32,7 +33,7 @@
 		<c:forEach items="${list}" var="dto">
 		<tr>
 			<td>${dto.num}</td>
-			<td>${dto.title}</td>
+			<td><a href="retrieve.do?num=${dto.num}">${dto.title}</a></td>
 			<td>${dto.author}</td>
 			<td>${dto.writeday}</td>
 			<td>${dto.readcnt}</td>

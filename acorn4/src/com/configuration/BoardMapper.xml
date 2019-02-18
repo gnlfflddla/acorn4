@@ -3,9 +3,22 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="BoardMapper">
-	<select id="boardlist" resultType="Board">
-		select num,author,title,content,writeday,readcnt,repRoot,repStep,repIndent
+	<select id="boardRetrieve" resultType="Board">
+		select num,title,author,content,writeday,readcnt,repRoot,repStep,repIndent
 		from board
 		order by repRoot desc, repStep asc
 	</select>
+	<select id="boardlist" resultType="Board">
+		select num,title,author,content,writeday,readcnt,repRoot,repStep,repIndent
+		from board
+		order by repRoot desc, repStep asc
+	</select>
+	<insert id="boardWrite" parameterType="Board">
+		insert into board(num,title,author,content,repRoot,repStep,repIndent)
+		values(board_seq.nextval,#{title},#{author},#{content},board_seq.currval,0,0)
+	</insert>
+	<update id="boardCnt" parameterType="String">
+		update board set readcnt = readcnt+1
+		where num=#{_num}
+	</update>
 </mapper>
