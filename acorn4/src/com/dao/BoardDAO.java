@@ -50,7 +50,25 @@ public class BoardDAO {
 		
 		return result;
 	}
-	
-	
-	
+	//글 검색하기
+	public List<BoardDTO> boardSearch(SqlSession session,BoardDTO dto){
+		List<BoardDTO> list = new ArrayList<>();
+		list = session.selectList("BoardMapper.boardSearch", dto);
+		return list;
+	}
+	//답변글 입력폼 보기
+	public BoardDTO boardReplyUI(SqlSession session,String _num){
+		BoardDTO dto = new BoardDTO();
+		dto = session.selectOne("BoardMapper.boardReplyUI", _num);
+		return dto;
+	}
+	//답변글 의 기존 repStep 1증가
+	public void makeReply(SqlSession session,BoardDTO dto) {
+		session.update("BoardMapper.makeReply", dto);
+	}
+	//답변달기
+	public void boardReply(SqlSession session,BoardDTO dto) {
+		makeReply(session,dto);
+		session.insert("BoardMapper.boardReply", dto);
+	}
 }

@@ -3,19 +3,32 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="BoardMapper">
-	<select id="boardRetrieve" resultType="Board">
-		select num,title,author,content,writeday,readcnt,repRoot,repStep,repIndent
+	<insert id="boardReply" parameterType="Board">
+		insert into board(num,author,title,content,repRoot,repStep,repIndent)
+		values(board_seq.nextval,#{author},#{title},#{content},#{repRoot},#{repStep}+1,#{repIndent}+1)
+	</insert>
+	<update id="makeReply" parameterType="Board">
+		update board set repStep=repStep+1
+		where repRoot=#{repRoot} and repStep>#{repStep}
+	</update>
+	<select id="boardReplyUI" parameterType="String" resultType="Board">
+		select num,author,title,content,writeday,readcnt,repRoot,repStep,repIndent,secret
 		from board
-		order by repRoot desc, repStep asc
+		where num=#{_num}
+	</select>
+	<select id="boardRetrieve" parameterType="String" resultType="Board">
+		select num,author,title,content,writeday,readcnt,repRoot,repStep,repIndent,secret
+		from board
+		where num=#{_num}
 	</select>
 	<select id="boardlist" resultType="Board">
-		select num,title,author,content,writeday,readcnt,repRoot,repStep,repIndent
+		select num,title,author,content,writeday,readcnt,repRoot,repStep,repIndent,secret
 		from board
 		order by repRoot desc, repStep asc
 	</select>
 	<insert id="boardWrite" parameterType="Board">
-		insert into board(num,title,author,content,repRoot,repStep,repIndent)
-		values(board_seq.nextval,#{title},#{author},#{content},board_seq.currval,0,0)
+		insert into board(num,author,title,content,repRoot,repStep,repIndent,secret)
+		values(board_seq.nextval,#{author},#{title},#{content},board_seq.currval,0,0,#{secret})
 	</insert>
 	<update id="boardCnt" parameterType="String">
 		update board set readcnt = readcnt+1
@@ -28,4 +41,16 @@
 	<delete id="boardDelete" parameterType="String">
 		delete from board where num=#{_num}
 	</delete>
+	<select id="boardSearch" parameterType="Board" resultType="Board">
+		select num, author,title,content,writeday,readcnt ,secret
+		from board
+		<where>
+			<if test="title!=null">
+				title like  '%'|| #{title} ||'%'
+			</if>
+			<if test="author!=null">
+				author like  '%'|| #{author} ||'%'
+			</if>
+		</where>
+	</select>
 </mapper>

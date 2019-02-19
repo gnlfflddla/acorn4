@@ -10,12 +10,13 @@ public class BoardDTO {
 	private int repRoot;
 	private int repStep;
 	private int repIndent;
+	private char secret;
 	public BoardDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public BoardDTO(int num, String author, String title, String content, int readcnt, String writeday, int repRoot,
-			int repStep, int repIndent) {
+			int repStep, int repIndent, char secret) {
 		super();
 		this.num = num;
 		this.author = author;
@@ -26,6 +27,7 @@ public class BoardDTO {
 		this.repRoot = repRoot;
 		this.repStep = repStep;
 		this.repIndent = repIndent;
+		this.secret = secret;
 	}
 	public int getNum() {
 		return num;
@@ -81,11 +83,19 @@ public class BoardDTO {
 	public void setRepIndent(int repIndent) {
 		this.repIndent = repIndent;
 	}
+	public char getSecret() {
+		return secret;
+	}
+	public void setSecret(char secret) {
+		this.secret = secret;
+	}
 	@Override
 	public String toString() {
 		return "BoardDTO [num=" + num + ", author=" + author + ", title=" + title + ", content=" + content
 				+ ", readcnt=" + readcnt + ", writeday=" + writeday + ", repRoot=" + repRoot + ", repStep=" + repStep
-				+ ", repIndent=" + repIndent + "]";
+				+ ", repIndent=" + repIndent + ", secret=" + secret + "]";
 	}
+	
+	
 	
 }

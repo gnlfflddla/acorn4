@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.command.BoardCommand;
 import com.command.BoardDeleteCommand;
 import com.command.BoardListCommand;
+import com.command.BoardReplyCommand;
+import com.command.BoardReplyUICommand;
 import com.command.BoardRetrieveCommand;
+import com.command.BoardSearchCommand;
 import com.command.BoardUpdateCommand;
 import com.command.BoardWriteCommand;
 
@@ -32,7 +35,7 @@ public class BoardFrontController extends HttpServlet {
 		BoardCommand command = null;
 		String nextPage = null;
 		//목록보기
-		if(true/*com.equals("/list.do")*/) {
+		if(com.equals("/list.do")) {
 			command = new BoardListCommand();
 			command.execute(request, response);
 			nextPage="board/boardList.jsp";		//외부 프레임 만들기 전 테스트용 
@@ -45,7 +48,7 @@ public class BoardFrontController extends HttpServlet {
 		if(com.equals("/write.do")) {
 			command = new BoardWriteCommand();
 			command.execute(request, response);
-			nextPage="board/boardList.jsp";
+			nextPage="list.do";
 		}
 		//글자세히보기
 		if(com.equals("/retrieve.do")) {
@@ -60,6 +63,21 @@ public class BoardFrontController extends HttpServlet {
 		}
 		if(com.equals("/delete.do")) {
 			command = new BoardDeleteCommand();
+			command.execute(request, response);
+			nextPage="list.do";
+		}
+		if(com.equals("/search.do")) {
+			command = new BoardSearchCommand();
+			command.execute(request, response);
+			nextPage="board/boardList.jsp";
+		}
+		if(com.equals("/replyui.do")) {
+			command = new BoardReplyUICommand();
+			command.execute(request, response);
+			nextPage="board/boardReply.jsp";
+		}
+		if(com.equals("/reply.do")) {
+			command = new BoardReplyCommand();
 			command.execute(request, response);
 			nextPage="list.do";
 		}

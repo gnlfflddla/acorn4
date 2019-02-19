@@ -33,7 +33,11 @@
 		<c:forEach items="${list}" var="dto">
 		<tr>
 			<td>${dto.num}</td>
-			<td><a href="retrieve.do?num=${dto.num}">${dto.title}</a></td>
+			<td>
+			<c:forEach begin="1" end="${dto.repIndent}">
+				ㄴ
+			</c:forEach>
+			<a href="retrieve.do?num=${dto.num}">${dto.title}</a></td>
 			<td>${dto.author}</td>
 			<td>${dto.writeday}</td>
 			<td>${dto.readcnt}</td>
