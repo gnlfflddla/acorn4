@@ -4,20 +4,16 @@ package com.command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dto.BoardDTO;
 import com.service.BoardService;
 
-public class BoardRetrieveCommand implements BoardCommand {
+public class BoardDeleteCommand implements BoardCommand {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		String num=request.getParameter("num");
+		String num = request.getParameter("num");
 		
-		BoardDTO dto = new BoardDTO();
 		BoardService service = new BoardService();
-		dto=service.boardRetrieve(num);
-		
-		request.setAttribute("retrieve", dto);
+		service.boardDelete(num);
 	}
 
 }

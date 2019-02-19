@@ -21,4 +21,11 @@
 		update board set readcnt = readcnt+1
 		where num=#{_num}
 	</update>
+	<update id="boardUpdate" parameterType="Board">
+		update board set title=#{title}, author=#{author}, content=#{content}
+		where num=#{num}
+	</update>
+	<delete id="boardDelete" parameterType="String">
+		delete from board where num=#{_num}
+	</delete>
 </mapper>

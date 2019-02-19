@@ -2,7 +2,6 @@ package com.dao;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -37,6 +36,21 @@ public class BoardDAO {
 		
 		return result;
 	}
+	//글 수정하기
+	public int boardUpdate(SqlSession session,BoardDTO dto) {
+		// TODO Auto-generated method stub
+		int result = session.update("BoardMapper.boardUpdate", dto);
+		
+		return result;
+	}
+	//글 수정하기
+	public int boardDelete(SqlSession session,String _num) {
+		// TODO Auto-generated method stub
+		int result = session.delete("BoardMapper.boardDelete", _num);
+		
+		return result;
+	}
+	
 	
 	
 }

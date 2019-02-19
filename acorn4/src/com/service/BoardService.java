@@ -47,6 +47,30 @@ public class BoardService {
 		}
 		return result;
 	}
+	public int boardUpdate(BoardDTO dto) {
+		SqlSession session = MySqlSesstionFactory.getSesstion();
+		int result=0;
+		try {
+			BoardDAO dao = new BoardDAO();
+			result = dao.boardUpdate(session,dto);
+		} finally {
+			// TODO: handle finally clause
+			session.close();
+		}
+		return result;
+	}
+	public int boardDelete(String _num) {
+		SqlSession session = MySqlSesstionFactory.getSesstion();
+		int result=0;
+		try {
+			BoardDAO dao = new BoardDAO();
+			result = dao.boardDelete(session,_num);
+		} finally {
+			// TODO: handle finally clause
+			session.close();
+		}
+		return result;
+	}
 	
 
 }

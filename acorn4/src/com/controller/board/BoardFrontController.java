@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.command.BoardCommand;
+import com.command.BoardDeleteCommand;
 import com.command.BoardListCommand;
 import com.command.BoardRetrieveCommand;
+import com.command.BoardUpdateCommand;
 import com.command.BoardWriteCommand;
 
 @WebServlet("*.do")
@@ -50,6 +52,16 @@ public class BoardFrontController extends HttpServlet {
 			command = new BoardRetrieveCommand();
 			command.execute(request, response);
 			nextPage="board/boardRetrieve.jsp";
+		}
+		if(com.equals("/update.do")) {
+			command = new BoardUpdateCommand();
+			command.execute(request, response);
+			nextPage="list.do";
+		}
+		if(com.equals("/delete.do")) {
+			command = new BoardDeleteCommand();
+			command.execute(request, response);
+			nextPage="list.do";
 		}
 		
 		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
